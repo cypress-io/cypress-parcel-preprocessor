@@ -30,7 +30,7 @@
   },
   "files": [
     "src/*.js",
-    "!src/*-spec.js"
+    "!src/*spec.js"
   ],
   "homepage": "https://github.com/bahmutov/cypress-parcel-preprocessor#readme",
   "keywords": [
@@ -62,7 +62,7 @@
     "secure": "nsp check",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
-    "unit": "mocha src/*-spec.js",
+    "unit": "mocha src/*spec.js",
     "unused-deps": "dependency-check --unused --no-dev .",
     "cy:open": "cypress open",
     "cy:run": "cypress run"
