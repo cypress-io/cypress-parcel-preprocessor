@@ -10,13 +10,22 @@
 
 ## Install
 
-Requires [Node](https://nodejs.org/en/) version 6 or above.
+Requires [Node](https://nodejs.org/en/) version 8 or above.
 
 ```sh
-npm install --save cypress-parcel-preprocessor
+npm install --save-dev cypress cypress-parcel-preprocessor
 ```
 
 ## Use
+
+Register the preprocessor in [Cypress plugins file](https://on.cypress.io/writing-a-plugin)
+
+```js
+const cyParcel = require('cypress-parcel-preprocessor')
+module.exports = (on) => {
+  on('file:preprocessor', cyParcel)
+}
+```
 
 ### Small print
 

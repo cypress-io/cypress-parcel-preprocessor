@@ -63,21 +63,30 @@
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
     "unit": "mocha src/*-spec.js",
-    "unused-deps": "dependency-check --unused --no-dev ."
+    "unused-deps": "dependency-check --unused --no-dev .",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "release": {
     "analyzeCommits": "simple-commit-message"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.2",
+    "check-more-types": "2.24.0",
+    "cypress": "1.4.2",
     "dependency-check": "3.0.0",
     "deps-ok": "1.2.2",
     "git-issues": "1.3.1",
+    "lazy-ass": "1.6.0",
     "license-checker": "16.0.0",
     "mocha": "5.0.1",
     "nsp": "3.2.1",
     "pre-git": "3.17.0",
     "prettier-standard": "8.0.0",
     "standard": "11.0.0"
+  },
+  "dependencies": {
+    "debug": "3.1.0",
+    "parcel-bundler": "1.6.2"
   }
 }
