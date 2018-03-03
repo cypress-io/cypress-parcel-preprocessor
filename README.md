@@ -27,6 +27,12 @@ module.exports = (on) => {
 }
 ```
 
+## Debugging
+
+Start Cypress with `DEBUG=cypress-parcel-preprocessor` environment variable to see debug messages.
+
+![Debug messages](images/debug.png)
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2018

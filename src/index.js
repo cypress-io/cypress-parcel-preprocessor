@@ -1,4 +1,5 @@
 // @ts-check
+const debug = require('debug')('cypress-parcel-preprocessor')
 const ParcelBundler = require('parcel-bundler')
 
 const bundlers = {}
@@ -10,10 +11,10 @@ const bundleOnce = filePath => {
 
 const onFile = file => {
   const { filePath, shouldWatch } = file
-  console.log('file:preprocessor %s', filePath)
+  debug('file:preprocessor %s', filePath)
 
   if (bundlers[filePath]) {
-    console.log('file already bundled %s', filePath)
+    debug('file already bundled %s', filePath)
     return bundlers[filePath]
   }
 
@@ -31,8 +32,8 @@ const onFile = file => {
 
   bundlers[filePath] = new Promise((resolve, reject) => {
     bundler.on('bundled', b => {
-      console.log('bundled %s', filePath)
-      console.log('into %s', b.name)
+      debug('bundled %s', filePath)
+      debug('into %s', b.name)
       file.emit('rerun')
       resolve(b.name)
     })
