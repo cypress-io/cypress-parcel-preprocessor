@@ -16,7 +16,7 @@
       ],
       "pre-push": [
         "npm run unused-deps",
-        "npm run secure",
+        "echo disabled npm run secure",
         "npm run license",
         "npm run ban -- --all",
         "npm run size"
