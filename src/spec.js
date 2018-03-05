@@ -9,7 +9,9 @@ const exists = require('fs').existsSync
 describe('cypress-parcel-preprocessor', () => {
   const cyParcel = require('./index')
 
-  it('bundles given file', () => {
+  it('bundles given file', function () {
+    this.timeout(5000)
+
     const specFilename = join(
       __dirname,
       '..',
