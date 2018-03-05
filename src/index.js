@@ -1,17 +1,27 @@
 // @ts-check
 const debug = require('debug')('cypress-parcel-preprocessor')
 const ParcelBundler = require('parcel-bundler')
+const path = require('path')
 
 const bundlers = {}
 
-const bundleOnce = filePath => {
-  const bundler = new ParcelBundler(filePath, { watch: false })
-  return bundler.bundle().then(b => b.name)
+const bundleOnce = (filePath, outDir, outFile) => {
+  const options = {
+    watch: false,
+    hmr: false,
+    outFile,
+    outDir
+  }
+  const bundler = new ParcelBundler(filePath, options)
+  return bundler.bundle()
 }
 
 const onFile = file => {
-  const { filePath, shouldWatch } = file
+  const { filePath, shouldWatch, outputPath } = file
   debug('file:preprocessor %s', filePath)
+
+  const outDir = path.dirname(outputPath)
+  const outFile = path.basename(outputPath)
 
   if (bundlers[filePath]) {
     debug('file already bundled %s', filePath)
@@ -19,9 +29,12 @@ const onFile = file => {
   }
 
   if (!shouldWatch) {
-    return bundleOnce(filePath)
+    debug('bundle file once without watching to %s', outputPath)
+    return bundleOnce(filePath, outDir, outFile).then(_ => outputPath)
   }
 
+  // instead of temp folder for output files, use default "dist" folder
+  // this way the source maps are created and served next to the bundle
   const options = {
     watch: shouldWatch,
     // make output simpler and avoid possible conflicts with Cypress
