@@ -16,6 +16,8 @@ Requires [Node](https://nodejs.org/en/) version 8 or above.
 npm install --save-dev cypress cypress-parcel-preprocessor
 ```
 
+Note: `parcel-bundler` is peer dependency.
+
 ## Use
 
 Register the preprocessor in [Cypress plugins file](https://on.cypress.io/writing-a-plugin)
