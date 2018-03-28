@@ -9,6 +9,7 @@ node_js:
 script:
   - npm t
   - npm run cy:run
+  - node ./e2e-run.js
 after_success:
   - npm run travis-deploy-once "npm run semantic-release"
 branches:
