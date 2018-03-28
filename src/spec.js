@@ -19,7 +19,10 @@ describe('cypress-parcel-preprocessor', () => {
       'integration',
       'spec.js'
     )
-    const outputPath = join(__dirname, '..', 'dist', 'spec.js')
+
+    // without extension
+    const outputPath = join(__dirname, '..', 'dist', 'spec')
+
     const emit = () => {}
     const file = {
       filePath: specFilename,
@@ -27,8 +30,9 @@ describe('cypress-parcel-preprocessor', () => {
       outputPath,
       shouldWatch: false
     }
-    return cyParcel(file).then(filename => {
-      console.log('finished bundling')
+    return cyParcel(file).then(basename => {
+      console.log('finished bundling', basename)
+      const filename = basename + '.js'
       la(is.unemptyString(filename), 'expected bundled filename', filename)
       la(exists(filename), 'cannot find output bundle', filename)
     })
