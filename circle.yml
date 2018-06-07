@@ -1,0 +1,24 @@
+# https://docs.cypress.io/guides/guides/continuous-integration.html#CircleCI
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cypress/base:10
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+    working_directory: ~/app
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-app
+      - run: npm ci
+      - save_cache:
+          key: v1-app
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run: npm t
+      - run: npm run cy:run
+      - run: node ./e2e-run.js
+      # TODO semantic release
