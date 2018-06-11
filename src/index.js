@@ -6,8 +6,8 @@ const path = require('path')
 const bundlers = {}
 
 const bundleOnce = (filePath, outDir, outFile) => {
-  // seems parcel-bundler 1.7.0 does not want extension in the
-  // output filename
+  // seems parcel-bundler 1.7.0 does not want extension in the output filename
+  // TODO handle any filename extension
   const basename = path.basename(outFile, '.js')
   const options = {
     watch: false,
@@ -33,6 +33,7 @@ const onFile = file => {
 
   if (!shouldWatch) {
     debug('bundle file once without watching to %s', outputPath)
+    // TODO handle possible errors
     return bundleOnce(filePath, outDir, outFile).then(_ => outputPath)
   }
 
@@ -53,6 +54,7 @@ const onFile = file => {
       file.emit('rerun')
       resolve(b.name)
     })
+    // TODO handle error events bundler.on('error')
     bundler.bundle().catch(reject)
   })
 
