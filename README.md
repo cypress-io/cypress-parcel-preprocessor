@@ -21,7 +21,7 @@ Note: `parcel-bundler` is peer dependency.
 
 ## Use
 
-Register the preprocessor in [Cypress plugins file](https://on.cypress.io/writing-a-plugin)
+Register the preprocessor in your [background file](https://on.cypress.io/background process).
 
 ```js
 const cyParcel = require('cypress-parcel-preprocessor')
