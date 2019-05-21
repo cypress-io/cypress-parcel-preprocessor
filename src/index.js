@@ -55,7 +55,11 @@ const onFile = file => {
       resolve(b.name)
     })
     // TODO handle error events bundler.on('error')
-    bundler.bundle().catch(reject)
+    bundler.bundle().catch((err) => {
+      bundler.stop()
+      delete bundlers[filePath]
+      reject(err)
+    })
   })
 
   // TODO: add cleanup when watching the file is no longer necessary
